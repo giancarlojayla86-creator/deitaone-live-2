@@ -36,6 +36,21 @@ export default function Home() {
   }}
 >
   <iframe
+   <div
+  style={{
+    marginTop: 40,
+    marginBottom: 40
+  }}
+>
+  <iframe
+    src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_ndx&symbol=NASDAQ:NDX&interval=15&hidesidetoolbar=1&theme=dark"
+    width="100%"
+    height="500"
+    style={{
+      border: "1px solid #222"
+    }}
+  />
+</div>
     src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btc&symbol=BINANCE:BTCUSDT&interval=15&hidesidetoolbar=1&theme=dark"
     width="100%"
     height="500"
