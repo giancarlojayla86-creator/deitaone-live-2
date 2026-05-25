@@ -1,21 +1,34 @@
 export async function GET() {
-  const news = [
-    {
-      en: "FED'S KASHKARI: INFLATION STILL TOO HIGH",
-      zh: "美联储卡什卡利：通胀仍然过高",
-      time: new Date().toLocaleTimeString()
-    },
-    {
-      en: "BITCOIN MOVES ABOVE 100K",
-      zh: "比特币突破10万美元",
-      time: new Date().toLocaleTimeString()
-    },
-    {
-      en: "TESLA SURGES ON AI OPTIMISM",
-      zh: "特斯拉因AI乐观预期上涨",
-      time: new Date().toLocaleTimeString()
-    }
-  ];
+  try {
+    const res = await fetch(
+      "https://r.jina.ai/http://rsshub.app/twitter/user/deitaone",
+      {
+        cache: "no-store"
+      }
+    );
 
-  return Response.json(news);
+    const text = await res.text();
+
+    const lines = text
+      .split("\n")
+      .filter(line => line.length > 40)
+      .slice(0, 10);
+
+    const news = lines.map((line) => ({
+      en: line,
+      zh: "AI中文翻译开发中",
+      time: new Date().toLocaleTimeString()
+    }));
+
+    return Response.json(news);
+
+  } catch (e) {
+    return Response.json([
+      {
+        en: "ERROR LOADING NEWS",
+        zh: "新闻加载失败",
+        time: new Date().toLocaleTimeString()
+      }
+    ]);
+  }
 }
