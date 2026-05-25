@@ -1,3 +1,18 @@
+const news = [
+  {
+    en: "FED'S KASHKARI: INFLATION STILL TOO HIGH",
+    zh: "美联储卡什卡利：通胀仍然过高"
+  },
+  {
+    en: "APPLE SHARES RISE AFTER EARNINGS",
+    zh: "苹果财报后股价上涨"
+  },
+  {
+    en: "BITCOIN MOVES ABOVE 100K",
+    zh: "比特币突破10万美元"
+  }
+];
+
 export default function Home() {
   return (
     <main
@@ -9,27 +24,53 @@ export default function Home() {
         fontFamily: "monospace"
       }}
     >
-      <h1 style={{ fontSize: 36 }}>
+      <h1
+        style={{
+          fontSize: 40,
+          marginBottom: 20
+        }}
+      >
         DEITAONE LIVE
       </h1>
 
-      <div style={{ marginTop: 30 }}>
-        <div style={{ color: "#888" }}>
-          LIVE NEWS
-        </div>
-
-        <div style={{ marginTop: 20 }}>
-          FED'S KASHKARI: INFLATION STILL TOO HIGH
-        </div>
-
-        <div style={{ marginTop: 10, color: "#fff" }}>
-          美联储卡什卡利：通胀仍然过高
-        </div>
-
-        <div style={{ marginTop: 40, color: "#00ffff" }}>
-          MARKET TERMINAL ONLINE
-        </div>
+      <div
+        style={{
+          color: "#666",
+          marginBottom: 30
+        }}
+      >
+        REALTIME MARKET TERMINAL
       </div>
+
+      {news.map((item, index) => (
+        <div
+          key={index}
+          style={{
+            marginBottom: 40,
+            borderBottom: "1px solid #222",
+            paddingBottom: 20
+          }}
+        >
+          <div
+            style={{
+              color: "#00ff99",
+              fontSize: 18
+            }}
+          >
+            EN: {item.en}
+          </div>
+
+          <div
+            style={{
+              color: "#ffffff",
+              marginTop: 12,
+              fontSize: 16
+            }}
+          >
+            中文: {item.zh}
+          </div>
+        </div>
+      ))}
     </main>
   );
 }
