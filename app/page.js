@@ -1,23 +1,4 @@
-async function getNews() {
-  try {
-    const res = await fetch(
-      "https://api.allorigins.win/raw?url=https://rsshub.app/twitter/user/deitaone",
-      {
-        cache: "no-store"
-      }
-    );
-
-    const text = await res.text();
-
-    return text.slice(0, 3000);
-  } catch (e) {
-    return "ERROR LOADING";
-  }
-}
-
-export default async function Home() {
-  const news = await getNews();
-
+export default function Home() {
   return (
     <main
       style={{
@@ -32,25 +13,23 @@ export default async function Home() {
         DEITAONE LIVE
       </h1>
 
-      <div
-        style={{
-          marginTop: 20,
-          color: "#888"
-        }}
-      >
-        REALTIME TERMINAL
-      </div>
+      <div style={{ marginTop: 30 }}>
+        <div style={{ color: "#888" }}>
+          LIVE NEWS
+        </div>
 
-      <pre
-        style={{
-          marginTop: 30,
-          whiteSpace: "pre-wrap",
-          fontSize: 14,
-          lineHeight: 1.8
-        }}
-      >
-        {news}
-      </pre>
+        <div style={{ marginTop: 20 }}>
+          FED'S KASHKARI: INFLATION STILL TOO HIGH
+        </div>
+
+        <div style={{ marginTop: 10, color: "#fff" }}>
+          美联储卡什卡利：通胀仍然过高
+        </div>
+
+        <div style={{ marginTop: 40, color: "#00ffff" }}>
+          MARKET TERMINAL ONLINE
+        </div>
+      </div>
     </main>
   );
 }
