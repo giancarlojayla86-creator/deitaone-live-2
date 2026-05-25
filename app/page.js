@@ -1,24 +1,26 @@
-"use client";
+async function getNews() {
+  try {
+    const res = await fetch(
+      "https://deitaone-live-2.vercel.app/api/news",
+      {
+        cache: "no-store"
+      }
+    );
 
-import { useEffect, useState } from "react";
-
-export default function Home() {
-  const [news, setNews] = useState([]);
-
-  async function loadNews() {
-    const res = await fetch("/api/news");
-    const data = await res.json();
-
-    setNews(data);
+    return await res.json();
+  } catch (e) {
+    return [
+      {
+        en: "ERROR",
+        zh: "加载失败",
+        time: new Date().toLocaleTimeString()
+      }
+    ];
   }
+}
 
-  useEffect(() => {
-    loadNews();
-
-    const interval = setInterval(loadNews, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+export default async function Home() {
+  const news = await getNews();
 
   return (
     <main
@@ -30,52 +32,38 @@ export default function Home() {
         fontFamily: "monospace"
       }}
     >
-      <h1 style={{ fontSize: 40 }}>
+      <h1 style={{ fontSize: 36 }}>
         DEITAONE LIVE
       </h1>
 
-      <div
-        style={{
-          color: "#666",
-          marginBottom: 30
-        }}
-      >
-        REALTIME MARKET TERMINAL
+      <div style={{ color: "#888", marginBottom: 30 }}>
+        REALTIME MARKET NEWS
       </div>
 
-      {news.map((item, index) => (
+      {news.map((item, i) => (
         <div
-          key={index}
+          key={i}
           style={{
-            borderBottom: "1px solid #111",
-            padding: "25px 0"
+            borderBottom: "1px solid #222",
+            padding: "12px 0"
           }}
         >
-          <div
-            style={{
-              color: "#666",
-              marginBottom: 10
-            }}
-          >
+          <div style={{ fontSize: 12, color: "#666" }}>
             {item.time}
           </div>
 
-          <div
-            style={{
-              color: "#00ff99",
-              fontSize: 18
-            }}
-          >
+          <div style={{ marginTop: 5 }}>
             {item.en}
           </div>
 
           <div
             style={{
-              color: "#fff",
-              marginTop: 12
+              marginTop: 6,
+              color: "#00ffaa",
+              fontSize: 14
             }}
           >
-            {item.zh}
+            中文：{item.zh}
           </div>
         </div>
       ))}
