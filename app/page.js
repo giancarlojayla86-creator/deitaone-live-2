@@ -29,6 +29,21 @@ export default function Home() {
 
   return (
     <main
+  <div
+  style={{
+    marginTop: 30,
+    marginBottom: 40
+  }}
+>
+  <iframe
+    src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_btc&symbol=BINANCE:BTCUSDT&interval=15&hidesidetoolbar=1&theme=dark"
+    width="100%"
+    height="500"
+    style={{
+      border: "1px solid #222"
+    }}
+  />
+</div>
       style={{
         background: "#000",
         color: "#00ff99",
