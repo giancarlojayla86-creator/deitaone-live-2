@@ -14,12 +14,21 @@ export async function GET() {
       .filter(line => line.length > 40)
       .slice(0, 10);
 
-    const news = lines.map((line) => ({
-      en: line,
-      zh: "AI中文翻译开发中",
-      time: new Date().toLocaleTimeString()
-    }));
+const news = lines.map((line) => ({
+  en: line,
 
+  zh:
+    line
+      .replace("FED", "美联储")
+      .replace("inflation", "通胀")
+      .replace("stocks", "股票")
+      .replace("market", "市场")
+      .replace("rates", "利率")
+      .replace("oil", "原油")
+      .replace("Bitcoin", "比特币"),
+
+  time: new Date().toLocaleTimeString()
+}));
     return Response.json(news);
 
   } catch (e) {
