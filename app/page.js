@@ -1,22 +1,51 @@
-const news = [
-  {
-    en: "FED'S KASHKARI: INFLATION STILL TOO HIGH",
-    zh: "美联储卡什卡利：通胀仍然过高",
-    time: "22:31:04"
-  },
-  {
-    en: "APPLE SHARES RISE AFTER EARNINGS",
-    zh: "苹果财报后股价上涨",
-    time: "22:32:11"
-  },
-  {
-    en: "BITCOIN MOVES ABOVE 100K",
-    zh: "比特币突破10万美元",
-    time: "22:33:09"
-  }
-];
+"use client";
+
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    const fakeNews = [
+      {
+        en: "FED'S KASHKARI: INFLATION STILL TOO HIGH",
+        zh: "美联储卡什卡利：通胀仍然过高"
+      },
+      {
+        en: "APPLE SHARES RISE AFTER EARNINGS",
+        zh: "苹果财报后股价上涨"
+      },
+      {
+        en: "BITCOIN MOVES ABOVE 100K",
+        zh: "比特币突破10万美元"
+      },
+      {
+        en: "TESLA SURGES ON AI OPTIMISM",
+        zh: "特斯拉因AI乐观预期上涨"
+      }
+    ];
+
+    let index = 0;
+
+    const addNews = () => {
+      setNews((prev) => [
+        {
+          ...fakeNews[index % fakeNews.length],
+          time: new Date().toLocaleTimeString()
+        },
+        ...prev
+      ]);
+
+      index++;
+    };
+
+    addNews();
+
+    const interval = setInterval(addNews, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main
       style={{
@@ -48,7 +77,7 @@ export default function Home() {
             color: "#666"
           }}
         >
-          MARKET TERMINAL
+          LIVE TERMINAL
         </div>
       </div>
 
